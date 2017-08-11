@@ -1,0 +1,559 @@
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>From local to global: Edge profiles to camera motion in blurred images</title>
+    <style type="text/css">
+        body {
+            font: 100% Verdana, Arial, sans-serif;
+        }
+
+        a, a:link, a:visited {
+            color: #1f82a9;
+            background: transparent text-decoration: underline;
+            cursor: pointer;
+            background-color: underline;
+        }
+
+        .style1 {
+            text-align: center;
+        }
+
+        .style2 {
+            text-align: left;
+        }
+
+        .style3 {
+            font-size: large;
+            color: #0000FF;
+        }
+
+        .style5 {
+            text-align: left;
+            font-size: large;
+            color: #0000FF;
+        }
+
+        .style7 {
+            text-align: center;
+            font-size: large;
+        }
+
+        .style8 {
+            text-align: center;
+            font-size: large;
+            color: #FF0000;
+        }
+
+        .style9 {
+            color: #FF0000;
+        }
+
+        .style10 {
+            font-size: large;
+        }
+
+        .style12 {
+            font-size: x-large;
+            text-align: center;
+            background-color: #C0C0C0;
+        }
+
+        .style13 {
+            font-size: 16pt;
+            color: #0000FF;
+        }
+
+        .auto-style1 {
+            text-align: center;
+            font-size: medium;
+        }
+
+        .auto-style2 {
+            font-family: Verdana;
+        }
+
+        .auto-style3 {
+            color: #1F82A9;
+        }
+    </style>
+</head>
+<body data-gr-c-s-loaded="true">
+
+    <h1 style="text-align:center">
+        From local to global: Edge profiles to camera motion in blurred images
+    </h1>
+
+    <p style="text-align:center">
+        <font color="#000000" size="3">
+            <a href="http://www.ee.iitm.ac.in/~ee13d050/">Subeesh Vasu</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://www.ee.iitm.ac.in/~raju/">A.N. Rajagopalan</a>
+        </font>
+    </p>
+
+    <br>
+    <table align="center">
+        <tbody><tr>
+            <td>
+                <a href="images/circles_blrd.png"><img src="images/circles_blrd.png" width="400"></a>
+            </td>
+            <td class="style1" style="width: 378px">
+                <a href="images/prediction_img.png"><img src="images/prediction_img.png" width="400"></a>
+            </td>
+            <td class="style1" valign="bottom">
+                <a href="images/ep_image.png"><img src="images/ep_image.png" width="400"></a>
+            </td>
+            <td class="style1" valign="bottom">
+                <a href="images/circles_epAlone.jpg"><img src="images/circles_epAlone.jpg" width="400"></a>
+            </td>
+        </tr>
+        <tr>
+            <td class="style1">Input blurred image</td>
+            <td class="style1"> Latent image prediction</td>
+            <td class="style1">Edge profile image</td>
+            <td class="style1">Deblurred output </td>
+        </tr>
+    </tbody></table>
+
+    <br>
+
+    <p><strong><span><font size="4">Abstract</font></span></strong></p>
+
+    <p>
+        In this work, we investigate the relation between the edge profiles present in a motion blurred image and the underlying camera motion responsible for causing the motion blur.
+While related works on camera motion estimation (CME) rely on the strong assumption of space-invariant blur, we handle the challenging case of general camera motion. We 
+first show how edge profiles `alone' can be harnessed to perform direct CME from a single observation. While it is routine for conventional methods to jointly estimate the latent
+ image too through alternating minimization, our above scheme is best-suited when such a pursuit is either impractical or inefficacious. For applications that actually favor
+an alternating minimization strategy, the edge profiles canserve as a valuable cue. We incorporate a suitably derived constraint from edge profiles into an existing blind deblurring
+ framework and demonstrate improved restoration performance. Experiments reveal that this approach yields state-of-the-art results for the blind deblurring problem.
+    </p>
+    <br>
+
+    <hr>
+    <p><strong><font size="4">Technical Paper, Supplementary, Poster, and Bibtex</font></strong></p>
+    
+            Subeesh Vasu and A.N. Rajagopalan, "From local to global: Edge profiles to camera motion in blurred images", IEEE 
+International Conference on Computer Vision (<b><i>CVPR</i></b>), 2017 
+            <br><br><img alt="" src="images/Adobe_pdf_icon.png" height="45" width="45">&nbsp;&nbsp;&nbsp;
+            <a href="pdf/2017_Subeesh_From_cvpr_main.pdf">Main paper</a>&nbsp; &nbsp; &nbsp;&nbsp;
+            <br><br><img alt="" src="images/Adobe_pdf_icon.png" height="45" width="45">&nbsp;&nbsp;&nbsp;
+            <a href="pdf/2017_Subeesh_From_cvpr_supple.pdf">Supplementary material</a>&nbsp;&nbsp;&nbsp;
+            <br><br><img alt="" src="images/Adobe_pdf_icon.png" height="45" width="45">&nbsp;&nbsp;&nbsp;
+            <a href="pdf/2017_Subeesh_From_cvpr_poster.pdf">Poster</a>&nbsp;&nbsp;&nbsp;
+            <br><br><img alt="" src= height="45" width="45">&nbsp;&nbsp;&nbsp;
+            <a href="pdf/2017_Subeesh_From_cvpr_bibtex.txt">BibTex</a>&nbsp;&nbsp;&nbsp;
+            <br><br><table align="center">
+            <tbody align="center">
+
+        <hr>
+
+<p><strong><span><font size="4">Experimental Results</font></span></strong></p>
+
+    <br>
+
+    <p class="style1"><strong>Synthetic example</strong></p>
+    <table align="center">
+        <tbody>
+            <tr>
+                <td>
+                    <a href="images/circles_blrd.png"><img alt="" src="images/circles_blrd.png" width="390"></a>
+                </td>
+                <td>
+                    <a href="images/circles_dblrd_Xu_2013.png"><img alt="" src="images/circles_dblrd_Xu_2013.png" width="390"></a>
+                </td>
+                <td>
+                    <a href="images/circles_epAlone.jpg"><img alt="" src="images/circles_epAlone.jpg" width="390"></a>
+                </td>
+                <td>
+                    <a href="images/circles_dblrd_Xu_Ep.jpg"><img alt="" src="images/circles_dblrd_Xu_Ep.jpg" width="390"></a>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <a href="images/circles_blrd_patch.png"><img alt="" src="images/circles_blrd_patch.png" width="390"></a>
+                </td>
+                <td>
+                    <a href="images/circles_dblrd_Xu_2013_patch.png"><img alt="" src="images/circles_dblrd_Xu_2013_patch.png" width="390"></a>
+                </td>
+                <td>
+                    <a href="images/circles_epAlone_patch.png"><img alt="" src="images/circles_epAlone_patch.png" width="390"></a>
+                </td>
+                <td>
+                    <a href="images/circles_dblrd_Xu_Ep_patch.png"><img alt="" src="images/circles_dblrd_Xu_Ep_patch.png" width="390"></a>
+                </td>
+            </tr>
+            <tr>
+                <td class="style1" style="height: 22px">Blurred image</td>
+                <td class="style1" style="height: 22px">Xu et al. CVPR 2013 </td>
+                <td class="style1" style="height: 22px">Ours - EpAlone</td>
+                <td class="style1" style="height: 22px">Ours - Xu + Ep</td>
+            </tr>
+                <tr>
+                <td>
+                    <a href=""><img alt="" src="" width="390"></a>
+                </td>
+                <td>
+                    <a href="images/xu_2013_krnls.png"><img alt="" src="images/xu_2013_krnls.png" width="390"></a>
+                </td>
+                <td>
+                    <a href="images/epAlone_krnls.png"><img alt="" src="images/epAlone_krnls.png" width="390"></a>
+                </td>
+                <td>
+                    <a href="images/Xu_Ep_krnls.png"><img alt="" src="images/Xu_Ep_krnls.png" width="390"></a>
+                </td>
+            </tr>
+            <tr>
+                <td class="style1" style="height: 22px"></td>
+                <td class="style1" style="height: 22px">Estimated kernels - Xu et al. CVPR 2013 </td>
+                <td class="style1" style="height: 22px">Estimated kernels - EpAlone</td>
+                <td class="style1" style="height: 22px">Estimated kernels - Xu + Ep</td>
+            </tr>
+        </tbody>
+    </table>
+    <br>
+    <br>
+    <p class="style1"><strong>Real examples</strong></p>
+    <table align="center">
+        <tbody>
+
+            <tr>
+                <td>
+                    <a href="images/car_forest_pan_2016_SV.jpg"><img alt="" src="images/car_forest_pan_2016_SV.jpg" width="275"></a>
+                </td>
+                <td>
+                    <a href="images/car_forest_Whyte.jpg"><img alt="" src="images/car_forest_Whyte.jpg" width="275"></a>
+                </td>
+                <td>
+                    <a href="images/car_forest_Xu_2013.jpg"><img alt="" src="images/car_forest_Xu_2013.jpg" width="275"></a>
+                </td>
+                <td>
+                    <a href="images/car_forest_Pan_2016.jpg"><img alt="" src="images/car_forest_Pan_2016.jpg" width="275"></a>
+                </td>
+                <td>
+                    <a href="images/car_forest_ePAlone.jpg"><img alt="" src="images/car_forest_ePAlone.jpg" width="275"></a>
+                </td>
+                <td>
+                    <a href="images/car_forest_Xu_E.jpg"><img alt="" src="images/car_forest_Xu_Ep.jpg" width="275"></a>
+                </td>
+            </tr>
+            <tr>
+                <td class="style1" style="height: 22px">Blurred image</td>
+                <td class="style1" style="height: 22px;">Whyte et al. CVPR 2010</td>
+                <td class="style1" style="height: 22px">Xu et al. CVPR 2013 </td>
+                <td class="style1" style="height: 22px">Pan et al. CVPR 2016 </td>
+                <td class="style1" style="height: 22px">Ours - EpAlone</td>
+                <td class="style1" style="height: 22px">Ours - Xu + Ep</td>
+            </tr>
+
+        </tbody>
+    </table>
+    <br>
+    <br>
+    <table align="center">
+        <tbody>
+
+            <tr>
+                <td>
+                    <a href="images/blurred2.jpg"><img alt="" src="images/blurred2.jpg" width="330"></a>
+                </td>
+                <td>
+                    <a href="images/blrd2_Gupta.jpg"><img alt="" src="images/blrd2_Gupta.jpg" width="330"></a>
+                </td>
+                <td>
+                    <a href="images/blrd2_Xu_2013.png"><img alt="" src="images/blrd2_Xu_2013.png" width="330"></a>
+                </td>
+                <td>
+                    <a href="images/blrd2_ePAlone.jpg"><img alt="" src="images/blrd2_ePAlone.jpg" width="330"></a>
+                </td>
+                <td>
+                    <a href="images/blrd2_Xu_Ep.jpg"><img alt="" src="images/blrd2_Xu_Ep.jpg" width="330"></a>
+                </td>
+            </tr>
+            <tr>
+                <td class="style1" style="height: 22px">Blurred image</td>
+                <td class="style1" style="height: 22px;">Gupta et al. ECCV 2010</td>
+                <td class="style1" style="height: 22px">Xu et al. CVPR 2013 </td>
+                <td class="style1" style="height: 22px">Ours - EpAlone</td>
+                <td class="style1" style="height: 22px">Ours - Xu + Ep</td>
+            </tr>
+
+        </tbody>
+    </table>
+    <br>
+
+    <br>
+    <table align="center">
+        <tbody>
+
+            <tr>
+                <td>
+                    <a href="images/blurred1.jpg"><img alt="" src="images/blurred1.jpg" width="330"></a>
+                </td>
+                <td>
+                    <a href="images/blrd1_Gupta.jpg"><img alt="" src="images/blrd1_Gupta.jpg" width="330"></a>
+                </td>
+                <td>
+                    <a href="images/blrd1_Xu_2013.png"><img alt="" src="images/blrd1_Xu_2013.png" width="330"></a>
+                </td>
+                <td>
+                    <a href="images/blrd1_ePAlone.jpg"><img alt="" src="images/blrd1_ePAlone.jpg" width="330"></a>
+                </td>
+                <td>
+                    <a href="images/blrd1_Xu_Ep.jpg"><img alt="" src="images/blrd1_Xu_Ep.jpg" width="330"></a>
+                </td>
+            </tr>
+            <tr>
+                <td class="style1" style="height: 22px">Blurred image</td>
+                <td class="style1" style="height: 22px;">Gupta et al. ECCV 2010</td>
+                <td class="style1" style="height: 22px">Xu et al. CVPR 2013 </td>
+                <td class="style1" style="height: 22px">Ours - EpAlone</td>
+                <td class="style1" style="height: 22px">Ours - Xu + Ep</td>
+            </tr>
+
+        </tbody>
+    </table>
+    <br>
+  <table align="center">
+        <tbody>
+
+            <tr>
+                <td>
+                    <a href="images/blurred3_SV.jpg"><img alt="" src="images/blurred3_SV.jpg" width="235"></a>
+                </td>
+                <td>
+                    <a href="images/blrd3_Gupta.jpg"><img alt="" src="images/blrd3_Gupta.jpg" width="235"></a>
+                </td>
+                <td>
+                    <a href="images/blrd3_Whyte.jpg"><img alt="" src="images/blrd3_Whyte.jpg" width="235"></a>
+                </td>
+                <td>
+                    <a href="images/blrd3_Xu_2013.jpg"><img alt="" src="images/blrd3_Xu_2013.jpg" width="235"></a>
+                </td>
+                <td>
+                    <a href="images/blrd3_Pan_2016.jpeg"><img alt="" src="images/blrd3_Pan_2016.jpeg" width="235"></a>
+                </td>
+                <td>
+                    <a href="images/blrd3_ePAlone.jpg"><img alt="" src="images/blrd3_ePAlone.jpg" width="235"></a>
+                </td>
+                <td>
+                    <a href="images/blrd3_Xu_Ep.jpg"><img alt="" src="images/blrd3_Xu_Ep.jpg" width="235"></a>
+                </td>
+            </tr>
+            <tr>
+                <td class="style1" style="height: 22px">Blurred image</td>
+                <td class="style1" style="height: 22px;">Gupta et al. ECCV 2010</td>
+                <td class="style1" style="height: 22px;">Whyte et al. CVPR 2010</td>
+                <td class="style1" style="height: 22px">Xu et al. CVPR 2013 </td>
+                <td class="style1" style="height: 22px">Pan et al. CVPR 2016 </td>
+                <td class="style1" style="height: 22px">Ours - EpAlone</td>
+                <td class="style1" style="height: 22px">Ours - Xu + Ep</td>
+            </tr>
+
+        </tbody>
+    </table>
+    <br>
+    <br>
+    <table align="center">
+        <tbody>
+
+            <tr>
+                <td>
+                    <a href="images/blrd4_Gupta.jpg"><img alt="" src="images/blrd4_Gupta.jpg" width="330"></a>
+                </td>
+                <td>
+                    <a href="images/blurred_r4_gpta.jpg"><img alt="" src="images/blurred_r4_gpta.jpg" width="330"></a>
+                </td>
+                <td>
+                    <a href="images/blrd4_Xu_2013.png"><img alt="" src="images/blrd4_Xu_2013.png" width="330"></a>
+                </td>
+                <td>
+                    <a href="images/blrd4_ePAlone.jpg"><img alt="" src="images/blrd4_ePAlone.jpg" width="330"></a>
+                </td>
+                <td>
+                    <a href="images/blrd4_Xu_Ep.jpg"><img alt="" src="images/blrd4_Xu_Ep.jpg" width="330"></a>
+                </td>
+            </tr>
+            <tr>
+                <td class="style1" style="height: 22px">Blurred image</td>
+                <td class="style1" style="height: 22px;">Gupta et al. ECCV 2010</td>
+                <td class="style1" style="height: 22px">Xu et al. CVPR 2013 </td>
+                <td class="style1" style="height: 22px">Ours - EpAlone</td>
+                <td class="style1" style="height: 22px">Ours - Xu + Ep</td>
+            </tr>
+
+        </tbody>
+    </table>
+    <br>
+    <br>
+  <table align="center">
+        <tbody>
+
+            <tr>
+                <td>
+                    <a href="images/Butcher_Shopc_sv.jpg"><img alt="" src="images/Butcher_Shopc_sv.jpg" width="235"></a>
+                </td>
+                <td>
+                    <a href="images/Butcher_hammrlin.jpg"><img alt="" src="images/Butcher_hammrlin.jpg" width="235"></a>
+                </td>
+                <td>
+                    <a href="images/Butcher_Hirsch.jpg"><img alt="" src="images/Butcher_Hirsch.jpg" width="235"></a>
+                </td>
+                <td>
+                    <a href="images/Butcher_Xu_2013.png"><img alt="" src="images/Butcher_Xu_2013.png" width="235"></a>
+                </td>
+                <td>
+                    <a href="images/Butcher_schuler.png"><img alt="" src="images/Butcher_schuler.png" width="235"></a>
+                </td>
+                <td>
+                    <a href="images/Butcher_ePAlone.jpg"><img alt="" src="images/Butcher_ePAlone.jpg" width="235"></a>
+                </td>
+                <td>
+                    <a href="images/Butcher_Xu_Ep.jpg"><img alt="" src="images/Butcher_Xu_Ep.jpg" width="235"></a>
+                </td>
+            </tr>
+            <tr>
+                <td class="style1" style="height: 22px">Blurred image</td>
+                <td class="style1" style="height: 22px;">Harmeling et al. NIPS 2010</td>
+                <td class="style1" style="height: 22px;">Hirsch et al. ICCV 2011</td>
+                <td class="style1" style="height: 22px">Xu et al. CVPR 2013 </td>
+                <td class="style1" style="height: 22px">Schuler et al. PAMI 2016 </td>
+                <td class="style1" style="height: 22px">Ours - EpAlone</td>
+                <td class="style1" style="height: 22px">Ours - Xu + Ep</td>
+            </tr>
+
+        </tbody>
+    </table>
+    <br>        
+    <br>
+  <table align="center">
+        <tbody>
+
+            <tr>
+                <td>
+                    <a href="images/Pantheon.jpg"><img alt="" src="images/Pantheon.jpg" width="235"></a>
+                </td>
+                <td>
+                    <a href="images/Pantheon_Whyte.jpg"><img alt="" src="images/Pantheon_Whyte.jpg" width="235"></a>
+                </td>
+                <td>
+                    <a href="images/Pantheon_Hirsch.jpg"><img alt="" src="images/Pantheon_Hirsch.jpg" width="235"></a>
+                </td>
+                <td>
+                    <a href="images/Pantheon_Xu_2013.png"><img alt="" src="images/Pantheon_Xu_2013.png" width="235"></a>
+                </td>
+                <td>
+                    <a href="images/Pantheon_schuler.png"><img alt="" src="images/Pantheon_schuler.png" width="235"></a>
+                </td>
+                <td>
+                    <a href="images/Pantheon_ePAlone.jpg"><img alt="" src="images/Pantheon_ePAlone.jpg" width="235"></a>
+                </td>
+                <td>
+                    <a href="images/Pantheon_Xu_Ep.jpg"><img alt="" src="images/Pantheon_Xu_Ep.jpg" width="235"></a>
+                </td>
+            </tr>
+            <tr>
+                <td class="style1" style="height: 22px">Blurred image</td>
+                <td class="style1" style="height: 22px;">Whyte et al. CVPR 2010</td>
+                <td class="style1" style="height: 22px;">Hirsch et al. ICCV 2011</td>
+                <td class="style1" style="height: 22px">Xu et al. CVPR 2013 </td>
+                <td class="style1" style="height: 22px">Schuler et al. PAMI 2016 </td>
+                <td class="style1" style="height: 22px">Ours - EpAlone</td>
+                <td class="style1" style="height: 22px">Ours - Xu + Ep</td>
+            </tr>
+
+        </tbody>
+    </table>
+    <br>  
+   <br>
+  <table align="center">
+        <tbody>
+
+            <tr>
+                <td>
+                    <a href="images/Pertol_Station_SV.jpg"><img alt="" src="images/Pertol_Station_SV.jpg" width="235"></a>
+                </td>
+                <td>
+                    <a href="images/pt_stn_Gupta.jpg"><img alt="" src="images/pt_stn_Gupta.jpg" width="235"></a>
+                </td>
+                <td>
+                    <a href="images/pt_stn_Whyte.jpeg"><img alt="" src="images/pt_stn_Whyte.jpeg" width="235"></a>
+                </td>
+                <td>
+                    <a href="images/pt_stn_Xu_2013.png"><img alt="" src="images/pt_stn_Xu_2013.png" width="235"></a>
+                </td>
+                <td>
+                    <a href="images/pt_stn_Pan_2016.jpeg"><img alt="" src="images/pt_stn_Pan_2016.jpeg" width="235"></a>
+                </td>
+                <td>
+                    <a href="images/pt_stn_ePAlone.jpg"><img alt="" src="images/pt_stn_ePAlone.jpg" width="235"></a>
+                </td>
+                <td>
+                    <a href="images/pt_stn_Xu_Ep.jpg"><img alt="" src="images/pt_stn_Xu_Ep.jpg" width="235"></a>
+                </td>
+            </tr>
+            <tr>
+                <td class="style1" style="height: 22px">Blurred image</td>
+                <td class="style1" style="height: 22px;">Gupta et al. ECCV 2010</td>
+                <td class="style1" style="height: 22px;">Whyte et al. CVPR 2010</td>
+                <td class="style1" style="height: 22px">Xu et al. CVPR 2013 </td>
+                <td class="style1" style="height: 22px">Pan et al. CVPR 2016 </td>
+                <td class="style1" style="height: 22px">Ours - EpAlone</td>
+                <td class="style1" style="height: 22px">Ours - Xu + Ep</td>
+            </tr>
+
+        </tbody>
+    </table>
+    <br>  
+    <br>
+    <table align="center">
+        <tbody>
+
+            <tr>
+                <td>
+                    <a href="images/Vintage_Carc.jpg"><img alt="" src="images/Vintage_Carc.jpg" width="330"></a>
+                </td>
+                <td>
+                    <a href="images/Vintage_Carc_hammer.png"><img alt="" src="images/Vintage_Carc_hammer.png" width="330"></a>
+                </td>
+                <td>
+                    <a href="images/Vintage_Carc_Xu_2013.png"><img alt="" src="images/Vintage_Carc_Xu_2013.png" width="330"></a>
+                </td>
+                <td>
+                    <a href="images/Vintage_Carc_epAlone.jpg"><img alt="" src="images/Vintage_Carc_epAlone.jpg" width="330"></a>
+                </td>
+                <td>
+                    <a href="images/Vintage_Carc_Xu_Ep.jpg"><img alt="" src="images/Vintage_Carc_Xu_Ep.jpg" width="330"></a>
+                </td>
+            </tr>
+            <tr>
+                <td class="style1" style="height: 22px">Blurred image</td>
+                <td class="style1" style="height: 22px;">Harmeling et al. NIPS 2010</td>
+                <td class="style1" style="height: 22px">Xu et al. CVPR 2013 </td>
+                <td class="style1" style="height: 22px">Ours - EpAlone</td>
+                <td class="style1" style="height: 22px">Ours - Xu + Ep</td>
+            </tr>
+
+        </tbody>
+    </table>
+    <br>
+
+    <br>
+    <p><strong><font size="4">References</font></strong></p>
+
+    <p>[1] O. Whyte, J. Sivic, A. Zisserman, and J. Ponce. “Non-uniform deblurring for shaken images”, CVPR 2010.</p>
+
+    <p>[2] A. Gupta, N. Joshi, L. Zitnick, M. Cohen, and B. Curless. “Single image deblurring using motion density functions”, ECCV 2010.</p>
+
+    <p>[3] S. Harmeling, H. Michael, and B. Sch ̈olkopf. “Space-variant single-image blind deconvolution for removing camera shake”, NIPS 2010.</p>
+
+    <p>[4] M. Hirsch, C. J. Schuler, S. Harmeling, and B. Sch ̈olkopf. “Fast removal of non-uniform camera shake”, ICCV 2011.</p>
+
+    <p>[5] L. Xu, S. Zheng, and J. Jia. “Unnatural <em>l</em><sub>0</sub> sparse representation for natural image deblurring”, CVPR 2013.</p>
+
+    <p>[6] J. Pan, D. Sun, H. Pfister, and M.-H. Yang. “Blind image deblurring using dark channel prior”, CVPR 2016.</p>
+
+    <p>[7] C. J. Schuler, M. Hirsch, S. Harmeling, and B. Sch ̈olkopf. “Learning to deblur.”, PAMI 2016.</p>
+
+    <br>
+    <br>
+    <div id="sbi_camera_button" class="sbi_search" style="left: 0px; top: 0px; position: absolute; width: 29px; height: 27px; border: none; margin: 0px; padding: 0px; z-index: 2147483647; display: none;"></div>
+
+
+</body><span class="gr__tooltip"><span class="gr__tooltip-content"></span><i class="gr__tooltip-logo"></i><span class="gr__triangle"></span></span></html>
