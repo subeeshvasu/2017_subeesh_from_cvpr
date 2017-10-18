@@ -1,7 +1,7 @@
-@InProceedings{Vasu_2017_CVPR,
-author = {Vasu, Subeesh and Rajagopalan, A. N.},
-title = {From Local to Global: Edge Profiles to Camera Motion in Blurred Images},
-booktitle = {The IEEE Conference on Computer Vision and Pattern Recognition (CVPR)},
-month = {July},
-year = {2017}
-} 
+@inproceedings{vasu2017local,
+  title={From local to global: Edge profiles to camera motion in blurred images},
+  author={Vasu, Subeesh and Rajagopalan, AN},
+  booktitle={Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition},
+  pages={4447--4456},
+  year={2017}
+}
